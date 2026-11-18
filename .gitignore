@@ -1,0 +1,19 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+
+# Build
+build/
+*.hex
+*.elf
+*.bin
+
+# Wokwi (arquivos gerados localmente)
+.wokwi/
+
+# Zips locais
+*.zip

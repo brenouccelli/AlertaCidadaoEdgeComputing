@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "author": "Alerta Cidadao - Global Solution 2026.2",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 94, "left": -130, "attrs": {} },
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 120, "left": 240, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": -90, "left": 225, "attrs": { "pins": "i2c" } },
+    { "type": "wokwi-hc-sr04", "id": "ultra1", "top": -45, "left": 625, "attrs": { "distance": "150" } },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -52, "left": 550, "attrs": { "temperature": "25", "humidity": "60" } },
+    { "type": "wokwi-led", "id": "led-green", "top": 224, "left": 323, "attrs": { "color": "green" } },
+    { "type": "wokwi-led", "id": "led-yellow", "top": 224, "left": 400, "attrs": { "color": "yellow" } },
+    { "type": "wokwi-led", "id": "led-red", "top": 224, "left": 477, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r-green", "top": 185, "left": 290, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r-yellow", "top": 185, "left": 367, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r-red", "top": 185, "left": 444, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 345, "left": 255, "rotate": 180, "attrs": { "volume": "0.2" } }
+  ],
+  "connections": [
+    [ "uno:5V", "bb1:bp.1", "red", [ "v10" ] ],
+    [ "uno:GND.2", "bb1:bn.1", "black", [ "v18" ] ],
+    [ "bb1:bp.2", "bb1:tp.2", "red", [] ],
+    [ "bb1:bn.2", "bb1:tn.2", "black", [] ],
+
+    [ "uno:A4", "lcd1:SDA", "blue", [ "v-10" ] ],
+    [ "uno:A5", "lcd1:SCL", "orange", [ "v-18" ] ],
+    [ "lcd1:VCC", "bb1:tp.4", "red", [] ],
+    [ "lcd1:GND", "bb1:tn.4", "black", [] ],
+
+    [ "ultra1:VCC", "bb1:tp.24", "red", [] ],
+    [ "ultra1:GND", "bb1:tn.24", "black", [] ],
+    [ "uno:10", "ultra1:ECHO", "green", [ "v-42" ] ],
+    [ "uno:9", "ultra1:TRIG", "yellow", [ "v-37" ] ],
+
+    [ "dht1:VCC", "bb1:tp.22", "red", [] ],
+    [ "dht1:GND", "bb1:tn.22", "black", [] ],
+    [ "uno:8", "dht1:SDA", "blue", [ "v-32" ] ],
+
+    [ "uno:7", "bb1:19t.a", "orange", [ "v-27" ] ],
+    [ "bb1:19t.c", "r-red:1", "orange", [] ],
+    [ "r-red:2", "bb1:25t.c", "orange", [] ],
+    [ "bb1:25t.e", "bb1:25b.f", "orange", [] ],
+    [ "led-red:A", "bb1:25b.i", "orange", [] ],
+    [ "led-red:C", "bb1:24b.i", "black", [] ],
+    [ "bb1:24b.j", "bb1:bn.24", "black", [] ],
+
+    [ "uno:6", "bb1:11t.a", "yellow", [ "v-22" ] ],
+    [ "bb1:11t.c", "r-yellow:1", "yellow", [] ],
+    [ "r-yellow:2", "bb1:17t.c", "yellow", [] ],
+    [ "bb1:17t.e", "bb1:17b.f", "yellow", [] ],
+    [ "led-yellow:A", "bb1:17b.i", "yellow", [] ],
+    [ "led-yellow:C", "bb1:16b.i", "black", [] ],
+    [ "bb1:16b.j", "bb1:bn.16", "black", [] ],
+
+    [ "uno:5", "bb1:3t.a", "green", [ "v-17" ] ],
+    [ "bb1:3t.c", "r-green:1", "green", [] ],
+    [ "r-green:2", "bb1:9t.c", "green", [] ],
+    [ "bb1:9t.e", "bb1:9b.f", "green", [] ],
+    [ "led-green:A", "bb1:9b.i", "green", [] ],
+    [ "led-green:C", "bb1:8b.i", "black", [] ],
+    [ "bb1:8b.j", "bb1:bn.8", "black", [] ],
+
+    [ "uno:4", "bb1:1b.f", "blue", [ "v-12" ] ],
+    [ "bb1:1b.j", "bz1:2", "blue", [] ],
+    [ "bz1:1", "bb1:bn.3", "black", [] ]
+  ],
+  "dependencies": {}
+}
